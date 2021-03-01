@@ -1,0 +1,22 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "for the f fetch",
+  "main": "api.js",
+  "scripts": {
+    "test": "redo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "node-server"
+  },
+  "keywords": [
+    "nodejs",
+    "server"
+  ],
+  "author": "redo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
