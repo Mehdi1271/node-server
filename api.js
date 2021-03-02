@@ -1,27 +1,15 @@
-const https = require("https");
-const express = require('express');
+var http = require('http'),
+    httpProxy = require('http-proxy');
+//
+// Create your proxy server and set the target in the options.
+//
+httpProxy.createProxyServer({target:'http://localhost:7370'}).listen(3000); // See (†)
 
-const app = express();
-
-app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	next();
-});
-
-app.get('/', function (req, res) {
-	const exec = require('child_process').exec;
-
-	exec('curl ' + req.query.url + ' --insecure', function (error, stdout, stderr) {
-	  console.log('stdout: ' + stdout);
-	  console.log('stderr: ' + stderr);
-
-	  res.json(stdout);
-
-	  if (error !== null) {
-		console.log('exec error: ' + error);
-	  }
-	});
-});
-
-app.listen(3000, function () { console.log('listening on port 3000!'); });
+//
+// Create your target server
+//
+//http.createServer(function (req, res) {
+//  res.writeHead(200, { 'Content-Type': 'text/plain' });
+//  res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
+//  res.end();
+//}).listen(3000);
